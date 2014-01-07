@@ -56,13 +56,13 @@
           'defines': [ '<@(openssl_mips_defines)' ],
           'defines!': [ 'OPENSSL_NO_ASM' ],
         }],
-        ['OS != "win" and target_arch == "ia32"', {
+        ['OS == "linux" and target_arch == "ia32"', {
           'sources': [ '<@(openssl_x86_sources)' ],
           'sources!': [ '<@(openssl_x86_source_excludes)' ],
           'defines': [ '<@(openssl_x86_defines)' ],
           'defines!': [ 'OPENSSL_NO_ASM' ],
         }],
-        ['OS != "win" and target_arch == "x64"', {
+        ['OS == "linux" and target_arch == "x64"', {
           'sources': [ '<@(openssl_x86_64_sources)' ],
           'sources!': [ '<@(openssl_x86_64_source_excludes)' ],
           'defines': [ '<@(openssl_x86_64_defines)' ],
@@ -101,6 +101,9 @@
             # returned value.
             '-Wno-unused-value',
           ],
+          'xcode_settings': {
+            'GCC_C_LANGUAGE_STANDARD': 'gnu99',
+          }
         }, { # Not clang. Disable all warnings.
           'cflags': [
             '-w',
